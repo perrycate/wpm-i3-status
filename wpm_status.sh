@@ -10,14 +10,12 @@ INTERVAL=5
 WPM_THING=5
 
 TMP_FILE=/tmp/cpm_count_$(uuidgen)
-echo $TMP_FILE
 
 AWK_FILTER='
 / 50 / {next} # Ignore Shifts
 / 22 / {next} # Ignore Backspaces
 /press/ {print ""; fflush(stdout)}
 '
-echo $AWK_FILTER
 
 # TODO kill this when the script is killed
 xinput test 13 | awk -f <(cat - <<-'EOD'
@@ -35,5 +33,5 @@ do
 
         WPM=$(($CHARS * (60 / $INTERVAL) / $WPM_THING))
 
-        echo "$WPM | $line" || exit 1
+        echo "wpm $WPM | $line" || exit 1
 done
