@@ -11,12 +11,6 @@ WPM_THING=5
 
 TMP_FILE=/tmp/cpm_count_$(uuidgen)
 
-AWK_FILTER='
-/ 50 / {next} # Ignore Shifts
-/ 22 / {next} # Ignore Backspaces
-/press/ {print ""; fflush(stdout)}
-'
-
 # TODO kill this when the script is killed
 xinput test 13 | awk -f <(cat - <<-'EOD'
 / 50 / {next} # Ignore Shifts
